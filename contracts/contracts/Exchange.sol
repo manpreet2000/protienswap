@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "../node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "../node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 interface IFactory {
     function getExchange(address _tokenAddress) external returns (address);
