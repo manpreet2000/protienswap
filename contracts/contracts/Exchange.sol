@@ -13,6 +13,7 @@ interface IExchange {
     function PttToTokenInputSwap(uint256 _ptt_sold, uint256 _min_token, uint256 deadline) external returns(uint256);
     function PttToTokenOutputSwap(uint256 _token_bought, uint256 _max_ptt, uint256 deadline) external returns(uint256);
 }
+
 contract Exchange is ERC20{
     
     address public tokenAddress;
@@ -23,6 +24,7 @@ contract Exchange is ERC20{
         pttAddress = _ptt;
         factory = msg.sender;
     }
+
     function getReserve(address _tokenAddress) public view returns(uint256){
         IERC20 token = IERC20(_tokenAddress);
         return token.balanceOf(address(this));
@@ -57,9 +59,9 @@ contract Exchange is ERC20{
             
             _mint(msg.sender,mintedLiquidity);
             return mintedLiquidity;
-        }
-        
+        }   
     }
+
     function removeLiquidity(uint256 _amount, uint256 _minppt, uint256 _mintoken, uint256 _deadline) public returns(uint256,uint256){
         require(_amount>0 && _minppt>0 && _mintoken>0 && _deadline>block.timestamp);
         require(totalSupply()>0,"empty pool");
@@ -74,7 +76,6 @@ contract Exchange is ERC20{
         return (pttAmount,tokenAmount);
     }
     
-    
     function getInputPrice(uint256 _inputAmount, uint256 _inputReserve, uint256 _outputReserve) private pure returns(uint256){
         require(_inputAmount>0 && _inputReserve>0 && _outputReserve>0,"Wrong arguments");
         uint256 inputAmountWithFees = _inputAmount * 997;
@@ -82,12 +83,14 @@ contract Exchange is ERC20{
         uint256 den = (_inputReserve * 1000) + inputAmountWithFees;
         return num/den;
     }
+
     function getOutputPrice(uint256 _outputAmount,uint256 _inputReserve, uint256 _outputReserve) private pure returns(uint256){
         require(_outputAmount>0 && _inputReserve>0 && _outputReserve>0,"Wrong arguments");
         uint256 num = _inputReserve * _outputAmount * 1000;
         uint256 den = (_outputReserve - _outputAmount) * 997;
         return num/den+1;
     }
+
     function getPttToTokenInputPrice(uint256 _ptt_sold) public returns(uint256) {
         require(_ptt_sold>0);
         uint256 pttReserve = getReserve(pttAddress);
@@ -111,6 +114,7 @@ contract Exchange is ERC20{
         uint256 pttAmount = getInputPrice(_token_sold,tokenReserve,pttReserve);
         return pttAmount;
     }
+
     function getTokenToPttOutputPrice(uint256 _ptt_bought) public returns(uint256) {
         require(_ptt_bought>0);
         uint256 pttReserve = getReserve(pttAddress);
@@ -118,7 +122,6 @@ contract Exchange is ERC20{
         uint256 tokenAmount = getOutputPrice(_ptt_bought,tokenReserve,pttReserve);
         return tokenAmount;
     }
-    
     
     function PttToTokenInputSwap(uint256 _ptt_sold, uint256 _min_token, uint256 deadline) public returns(uint256){
         require(deadline >= block.timestamp && _ptt_sold > 0 && _min_token > 0, "Wrong arguments");
@@ -137,6 +140,7 @@ contract Exchange is ERC20{
         IERC20(tokenAddress).transfer(msg.sender, _token_bought);
         return pttAmount;
     }
+    
     function TokentoPttInputSwap(uint256 _token_sold, uint256 _min_ptt, uint256 deadline) public returns(uint256){
         require(deadline >= block.timestamp && _token_sold>0 && _min_ptt > 0, "Wrong arguments");
         uint256 pttAmount = getTokenToPttInputPrice(_token_sold);
@@ -186,13 +190,11 @@ contract Exchange is ERC20{
     }
     
     function TokenToTokenOutputSwap(uint256 _token_bought, uint256 _max_token_sold, uint256 deadline,address _tokenaddr) public returns(uint256){
-       require(deadline >= block.timestamp && _max_token_sold >0 && _token_bought > 0, "Wrong arguments");
+        require(deadline >= block.timestamp && _max_token_sold >0 && _token_bought > 0, "Wrong arguments");
         require(_tokenaddr!=address(0) && _tokenaddr!=tokenAddress);
         if(_tokenaddr == pttAddress) return TokentoPttOutputSwap(_token_bought, _max_token_sold, deadline);
         address exchange_addr = IFactory(factory).getExchange(_tokenaddr);
         require(exchange_addr!=address(this) && exchange_addr != address(0));
         return TokenToTokenOutput(_token_bought, _max_token_sold,deadline,exchange_addr);
-    }
-    
-    
+    }    
 }
