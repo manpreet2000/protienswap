@@ -96,7 +96,7 @@ const config: HardhatUserConfig = {
     ],
     overrides:{
       "contracts/WETH.sol":{
-        version: "0.4.10",
+        version: "0.4.26",
         settings:{
           optimizer: {
             enabled: true,

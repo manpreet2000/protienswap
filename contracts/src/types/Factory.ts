@@ -29,7 +29,6 @@ export interface FactoryInterface extends ethers.utils.Interface {
     "ProtienTokenAddress()": FunctionFragment;
     "createExchange(address)": FunctionFragment;
     "getExchange(address)": FunctionFragment;
-    "tokenToExchange(address)": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -41,10 +40,6 @@ export interface FactoryInterface extends ethers.utils.Interface {
     values: [string]
   ): string;
   encodeFunctionData(functionFragment: "getExchange", values: [string]): string;
-  encodeFunctionData(
-    functionFragment: "tokenToExchange",
-    values: [string]
-  ): string;
 
   decodeFunctionResult(
     functionFragment: "ProtienTokenAddress",
@@ -56,10 +51,6 @@ export interface FactoryInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "getExchange",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "tokenToExchange",
     data: BytesLike
   ): Result;
 
@@ -104,8 +95,6 @@ export interface Factory extends BaseContract {
       _tokenAddress: string,
       overrides?: CallOverrides
     ): Promise<[string]>;
-
-    tokenToExchange(arg0: string, overrides?: CallOverrides): Promise<[string]>;
   };
 
   ProtienTokenAddress(overrides?: CallOverrides): Promise<string>;
@@ -120,8 +109,6 @@ export interface Factory extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  tokenToExchange(arg0: string, overrides?: CallOverrides): Promise<string>;
-
   callStatic: {
     ProtienTokenAddress(overrides?: CallOverrides): Promise<string>;
 
@@ -134,8 +121,6 @@ export interface Factory extends BaseContract {
       _tokenAddress: string,
       overrides?: CallOverrides
     ): Promise<string>;
-
-    tokenToExchange(arg0: string, overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {};
@@ -152,11 +137,6 @@ export interface Factory extends BaseContract {
       _tokenAddress: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    tokenToExchange(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -171,11 +151,6 @@ export interface Factory extends BaseContract {
 
     getExchange(
       _tokenAddress: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    tokenToExchange(
-      arg0: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
