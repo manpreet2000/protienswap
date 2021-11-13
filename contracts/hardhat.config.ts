@@ -85,13 +85,26 @@ const config: HardhatUserConfig = {
     tests: "./test",
   },
   solidity: {
-    version: "0.8.0",
-    settings: {
-      optimizer: {
-        enabled: true,
-        runs: 800,
-      },
-    },
+    compilers:[
+      {version: "0.8.0",
+      settings: {
+        optimizer: {
+          enabled: true,
+          runs: 800,
+        },
+      }},
+    ],
+    overrides:{
+      "contracts/WETH.sol":{
+        version: "0.4.10",
+        settings:{
+          optimizer: {
+            enabled: true,
+            runs: 800,
+          },
+        }
+      }
+    }
   },
   typechain: {
     outDir: "src/types",
