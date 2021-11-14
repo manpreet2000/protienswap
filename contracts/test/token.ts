@@ -15,7 +15,7 @@ describe("Protien token", async function () {
   });
   it("address", async () => {
     const addr = await token.address;
-    console.log(addr);
+    // console.log(addr);
     expect(addr).not.equal("0x00");
   });
   it("Total supply", async () => {

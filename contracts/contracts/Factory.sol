@@ -7,7 +7,7 @@ contract Factory{
     constructor(address _adr){
         ProtienTokenAddress = _adr;
     }
-    mapping(address => address) public tokenToExchange;
+    mapping(address => address) private tokenToExchange;
 
     function createExchange(address _tokenAddress) public returns(address){
         require(_tokenAddress != address(0), "Invalid token address");
