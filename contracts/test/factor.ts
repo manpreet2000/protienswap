@@ -43,7 +43,7 @@ describe("factor to exchange tests", () => {
   let Ptoken;
   let factory;
   let Weth;
-  let WETH_PTT_Exchange;
+  let WETH_PTT_Exchange,WETH_PTT_Exchange_addr;
   let exchange_abi = Exchange_ABI;
   beforeEach("initiate protien token and factor", async () => {
     [owner, addr1, addr2] = await ethers.getSigners();
@@ -58,7 +58,7 @@ describe("factor to exchange tests", () => {
     Weth = await WETH.deploy();
     await Weth.deployed();
     await factory.createExchange(Weth.address);
-    const WETH_PTT_Exchange_addr = await factory.getExchange(Weth.address);
+    WETH_PTT_Exchange_addr = await factory.getExchange(Weth.address);
     // console.log("WETH add", WETH_PTT_Exchange_addr);
     WETH_PTT_Exchange = new ethers.Contract(
       WETH_PTT_Exchange_addr,
@@ -79,7 +79,16 @@ describe("factor to exchange tests", () => {
       const WethDecimal = await Weth.decimals();
       const pttAmount = BigNumber.from((100*10**pttDecimal).toString());
       const wethAmount = BigNumber.from((10*10**WethDecimal).toString());
-      const LiquidityMinted = await WETH_PTT_Exchange.addLiquidity(pttAmount,wethAmount,10000000);
-      console.log(LiquidityMinted);
-  })
+      // // console.log(Date.now());
+      // const pttBalance = await Ptoken.balanceOf(owner.address);
+      // // console.log(pttBalance.toString());
+      // await Weth.deposit({value:(100 * 10**WethDecimal).toString() });
+      // const WethBalance = await Weth.balanceOf(owner.address);
+      // // console.log(WethBalance.toString());
+      // await Ptoken.approve(WETH_PTT_Exchange_addr,pttAmount);
+      // await Weth.approve(WETH_PTT_Exchange_addr,pttAmount);
+      const LiquidityMinted = await WETH_PTT_Exchange.addLiquidity(pttAmount,wethAmount,Date.now());
+      console.log("lq",LiquidityMinted);
+  });
+  
 });

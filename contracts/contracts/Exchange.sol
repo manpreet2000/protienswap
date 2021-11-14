@@ -33,9 +33,10 @@ contract Exchange is ERC20{
         require(_pttAmount > 0 && _tokenAmount > 0 , "Wrong arguments");
         if(totalSupply() <= 0){
             IERC20 token = IERC20(tokenAddress);
+            require(token.allowance(msg.sender,address(this)) >= _tokenAmount,"please approve the amount");
             token.transferFrom(msg.sender,address(this),_tokenAmount);
-            
             IERC20 ptt = IERC20(pttAddress);
+            require(ptt.allowance(msg.sender,address(this)) >= _pttAmount,"please approve the ptt amount");
             ptt.transferFrom(msg.sender,address(this),_pttAmount);
             
             _mint(msg.sender,_pttAmount);

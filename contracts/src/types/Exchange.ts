@@ -323,8 +323,8 @@ export interface Exchange extends BaseContract {
       _pttAmount: BigNumberish,
       _tokenAmount: BigNumberish,
       _deadline: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     allowance(
       owner: string,
@@ -461,8 +461,8 @@ export interface Exchange extends BaseContract {
     _pttAmount: BigNumberish,
     _tokenAmount: BigNumberish,
     _deadline: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   allowance(
     owner: string,
@@ -762,7 +762,7 @@ export interface Exchange extends BaseContract {
       _pttAmount: BigNumberish,
       _tokenAmount: BigNumberish,
       _deadline: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     allowance(
@@ -901,7 +901,7 @@ export interface Exchange extends BaseContract {
       _pttAmount: BigNumberish,
       _tokenAmount: BigNumberish,
       _deadline: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     allowance(
