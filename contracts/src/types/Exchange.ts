@@ -227,10 +227,12 @@ export interface ExchangeInterface extends ethers.utils.Interface {
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
+    "Liquidity(address,address,uint256)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Liquidity"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
 
@@ -240,6 +242,13 @@ export type ApprovalEvent = TypedEvent<
 >;
 
 export type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
+
+export type LiquidityEvent = TypedEvent<
+  [string, string, BigNumber],
+  { token: string; user: string; amount: BigNumber }
+>;
+
+export type LiquidityEventFilter = TypedEventFilter<LiquidityEvent>;
 
 export type TransferEvent = TypedEvent<
   [string, string, BigNumber],
@@ -323,8 +332,8 @@ export interface Exchange extends BaseContract {
       _pttAmount: BigNumberish,
       _tokenAmount: BigNumberish,
       _deadline: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     allowance(
       owner: string,
@@ -461,8 +470,8 @@ export interface Exchange extends BaseContract {
     _pttAmount: BigNumberish,
     _tokenAmount: BigNumberish,
     _deadline: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   allowance(
     owner: string,
@@ -701,6 +710,17 @@ export interface Exchange extends BaseContract {
       value?: null
     ): ApprovalEventFilter;
 
+    "Liquidity(address,address,uint256)"(
+      token?: string | null,
+      user?: string | null,
+      amount?: null
+    ): LiquidityEventFilter;
+    Liquidity(
+      token?: string | null,
+      user?: string | null,
+      amount?: null
+    ): LiquidityEventFilter;
+
     "Transfer(address,address,uint256)"(
       from?: string | null,
       to?: string | null,
@@ -762,7 +782,7 @@ export interface Exchange extends BaseContract {
       _pttAmount: BigNumberish,
       _tokenAmount: BigNumberish,
       _deadline: BigNumberish,
-      overrides?: CallOverrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     allowance(
@@ -901,7 +921,7 @@ export interface Exchange extends BaseContract {
       _pttAmount: BigNumberish,
       _tokenAmount: BigNumberish,
       _deadline: BigNumberish,
-      overrides?: CallOverrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     allowance(

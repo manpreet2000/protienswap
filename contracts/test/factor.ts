@@ -79,16 +79,38 @@ describe("factor to exchange tests", () => {
       const WethDecimal = await Weth.decimals();
       const pttAmount = BigNumber.from((100*10**pttDecimal).toString());
       const wethAmount = BigNumber.from((10*10**WethDecimal).toString());
-      // // console.log(Date.now());
       // const pttBalance = await Ptoken.balanceOf(owner.address);
-      // // console.log(pttBalance.toString());
-      // await Weth.deposit({value:(100 * 10**WethDecimal).toString() });
+      // console.log(pttBalance.toString());
+      await Weth.deposit({value:(100 * 10**WethDecimal).toString() });
       // const WethBalance = await Weth.balanceOf(owner.address);
-      // // console.log(WethBalance.toString());
-      // await Ptoken.approve(WETH_PTT_Exchange_addr,pttAmount);
-      // await Weth.approve(WETH_PTT_Exchange_addr,pttAmount);
-      const LiquidityMinted = await WETH_PTT_Exchange.addLiquidity(pttAmount,wethAmount,Date.now());
-      console.log("lq",LiquidityMinted);
+      // console.log(WethBalance.toString());
+      await Ptoken.approve(WETH_PTT_Exchange_addr,pttAmount);
+      await Weth.approve(WETH_PTT_Exchange_addr,wethAmount);
+      const tx=await WETH_PTT_Exchange.addLiquidity(pttAmount,wethAmount,Date.now());
+      // console.log(aa,owner.address);
+      await tx.wait();
+      const amount = await WETH_PTT_Exchange.totalSupply();
+      expect(amount.toString()).to.equal(pttAmount);
+      
+      // const pttAmount2 = BigNumber.from((1).toString());
+      // const wethAmount2 = BigNumber.from((11).toString());
+      // const a=await WETH_PTT_Exchange.getReserve(Ptoken.address);
+      // const b=await WETH_PTT_Exchange.getReserve(Weth.address);
+      // console.log((pttAmount2.toNumber()*a) / b);
+      // await Ptoken.approve(WETH_PTT_Exchange_addr,pttAmount2);
+      // await Weth.approve(WETH_PTT_Exchange_addr,wethAmount2);
+      // await WETH_PTT_Exchange.addLiquidity(pttAmount2,wethAmount2,Date.now());
+      // WETH_PTT_Exchange.on("Liquidity",(token,user,amount)=>{
+      //   console.log(amount.toString());
+      //   // expect(amount.toString()).to.equal(pttAmount);
+      // });
+      // await Ptoken.transfer(addr1.address,pttAmount2);
+      // await Weth.attach(addr1.address).deposit({value:(100 * 10**WethDecimal).toString() });
+      // await Ptoken.attach(addr1.address).approve(WETH_PTT_Exchange_addr,pttAmount2);
+      // await Weth.attach(addr1.address).approve(WETH_PTT_Exchange_addr,wethAmount2);
+      // const a = await WETH_PTT_Exchange.attach(addr1.address).addLiquidity(pttAmount2,wethAmount2,Date.now());
+      // console.log(await a.wait());
+      // // console.log(addr1.address);
   });
   
 });

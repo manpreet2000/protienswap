@@ -14,7 +14,7 @@ interface IExchange {
     function PttToTokenOutputSwap(uint256 _token_bought, uint256 _max_ptt, uint256 deadline) external returns(uint256);
 }
 contract Exchange is ERC20{
-    
+    event Liquidity(address indexed token, address indexed user, uint256 amount);
     address public tokenAddress;
     address public pttAddress;
     address public factory;
@@ -40,6 +40,7 @@ contract Exchange is ERC20{
             ptt.transferFrom(msg.sender,address(this),_pttAmount);
             
             _mint(msg.sender,_pttAmount);
+            emit Liquidity(tokenAddress,msg.sender,_pttAmount);
             return _pttAmount;
         }
         else{
@@ -57,6 +58,7 @@ contract Exchange is ERC20{
             uint256 mintedLiquidity = (totalSupply() * _pttAmount)/pttReserve;
             
             _mint(msg.sender,mintedLiquidity);
+            emit Liquidity(tokenAddress,msg.sender,mintedLiquidity);
             return mintedLiquidity;
         }
         

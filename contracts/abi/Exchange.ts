@@ -1,4 +1,5 @@
-export default [
+export default 
+[
 	{
 		"inputs": [
 			{
@@ -38,6 +39,31 @@ export default [
 			}
 		],
 		"name": "Approval",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "token",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "Liquidity",
 		"type": "event"
 	},
 	{
@@ -671,4 +697,4 @@ export default [
 		"stateMutability": "nonpayable",
 		"type": "function"
 	}
-];
+]
