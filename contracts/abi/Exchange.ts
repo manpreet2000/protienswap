@@ -425,6 +425,64 @@ export default
 		"inputs": [
 			{
 				"internalType": "uint256",
+				"name": "_inputAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_inputReserve",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_outputReserve",
+				"type": "uint256"
+			}
+		],
+		"name": "getInputPrice",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_outputAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_inputReserve",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_outputReserve",
+				"type": "uint256"
+			}
+		],
+		"name": "getOutputPrice",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
 				"name": "_ptt_sold",
 				"type": "uint256"
 			}
@@ -437,7 +495,7 @@ export default
 				"type": "uint256"
 			}
 		],
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -456,7 +514,7 @@ export default
 				"type": "uint256"
 			}
 		],
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -494,7 +552,7 @@ export default
 				"type": "uint256"
 			}
 		],
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -513,7 +571,7 @@ export default
 				"type": "uint256"
 			}
 		],
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
