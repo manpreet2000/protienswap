@@ -16,6 +16,7 @@ interface IExchange {
     function PttToTokenInputSwap(uint256 _ptt_sold, uint256 _min_token, uint256 deadline) external returns(uint256);
     function PttToTokenOutputSwap(uint256 _token_bought, uint256 _max_ptt, uint256 deadline) external returns(uint256);
 }
+
 contract Exchange is ERC20{
     //events
     event Addliquidity(address indexed token, address indexed user, uint256 tokenAmount,uint256 pttAmount);
@@ -31,6 +32,7 @@ contract Exchange is ERC20{
         pttAddress = _ptt;
         factory = msg.sender;
     }
+
     function getReserve(address _tokenAddress) public view returns(uint256){
         IERC20 token = IERC20(_tokenAddress);
         return token.balanceOf(address(this));
@@ -68,9 +70,9 @@ contract Exchange is ERC20{
             _mint(msg.sender,mintedLiquidity);
             emit Addliquidity(tokenAddress,msg.sender,tokenAmount,_pttAmount);
             return mintedLiquidity;
-        }
-        
+        }   
     }
+
     function removeLiquidity(uint256 _amount, uint256 _minppt, uint256 _mintoken, uint256 _deadline) public returns(uint256,uint256){
         require(_amount>0 && _minppt>0 && _mintoken>0 && _deadline>block.timestamp);
         require(totalSupply()>0,"empty pool");
@@ -131,7 +133,6 @@ contract Exchange is ERC20{
         return tokenAmount;
     }
     
-    
     function PttToTokenInputSwap(uint256 _ptt_sold, uint256 _min_token, uint256 deadline) public returns(uint256){
         require(deadline >= block.timestamp && _ptt_sold > 0 && _min_token > 0, "Wrong arguments for ptt to token swap");
         uint256 tokenAmount = getPttToTokenInputPrice(_ptt_sold);
@@ -151,6 +152,7 @@ contract Exchange is ERC20{
         emit swap(pttAddress,tokenAddress,msg.sender,pttAmount,_token_bought);
         return pttAmount;
     }
+    
     function TokentoPttInputSwap(uint256 _token_sold, uint256 _min_ptt, uint256 deadline) public returns(uint256){
         require(deadline >= block.timestamp && _token_sold>0 && _min_ptt > 0, "Wrong arguments for ptt input swap");
         uint256 pttAmount = getTokenToPttInputPrice(_token_sold);
