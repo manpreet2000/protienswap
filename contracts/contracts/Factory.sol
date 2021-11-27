@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 import "./Exchange.sol";
 contract Factory{
     address public ProtienTokenAddress;
+    event ExchangeCreated(address indexed token, address indexed exchange);
     constructor(address _adr){
         ProtienTokenAddress = _adr;
     }
@@ -15,7 +16,7 @@ contract Factory{
 
         Exchange exchange = new Exchange(_tokenAddress, ProtienTokenAddress);
         tokenToExchange[_tokenAddress] = address(exchange);
-
+        emit ExchangeCreated(_tokenAddress,address(exchange));
         return address(exchange);
     }
 
