@@ -39,6 +39,8 @@ export interface ExchangeInterface extends ethers.utils.Interface {
     "decimals()": FunctionFragment;
     "decreaseAllowance(address,uint256)": FunctionFragment;
     "factory()": FunctionFragment;
+    "getInputPrice(uint256,uint256,uint256)": FunctionFragment;
+    "getOutputPrice(uint256,uint256,uint256)": FunctionFragment;
     "getPttToTokenInputPrice(uint256)": FunctionFragment;
     "getPttToTokenOutputPrice(uint256)": FunctionFragment;
     "getReserve(address)": FunctionFragment;
@@ -98,6 +100,14 @@ export interface ExchangeInterface extends ethers.utils.Interface {
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "factory", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "getInputPrice",
+    values: [BigNumberish, BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getOutputPrice",
+    values: [BigNumberish, BigNumberish, BigNumberish]
+  ): string;
   encodeFunctionData(
     functionFragment: "getPttToTokenInputPrice",
     values: [BigNumberish]
@@ -184,6 +194,14 @@ export interface ExchangeInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "factory", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "getInputPrice",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getOutputPrice",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "getPttToTokenInputPrice",
     data: BytesLike
   ): Result;
@@ -227,10 +245,12 @@ export interface ExchangeInterface extends ethers.utils.Interface {
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
+    "Liquidity(address,address,uint256)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Liquidity"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
 
@@ -240,6 +260,13 @@ export type ApprovalEvent = TypedEvent<
 >;
 
 export type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
+
+export type LiquidityEvent = TypedEvent<
+  [string, string, BigNumber],
+  { token: string; user: string; amount: BigNumber }
+>;
+
+export type LiquidityEventFilter = TypedEventFilter<LiquidityEvent>;
 
 export type TransferEvent = TypedEvent<
   [string, string, BigNumber],
@@ -350,15 +377,29 @@ export interface Exchange extends BaseContract {
 
     factory(overrides?: CallOverrides): Promise<[string]>;
 
+    getInputPrice(
+      _inputAmount: BigNumberish,
+      _inputReserve: BigNumberish,
+      _outputReserve: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    getOutputPrice(
+      _outputAmount: BigNumberish,
+      _inputReserve: BigNumberish,
+      _outputReserve: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     getPttToTokenInputPrice(
       _ptt_sold: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     getPttToTokenOutputPrice(
       _token_bought: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     getReserve(
       _tokenAddress: string,
@@ -367,13 +408,13 @@ export interface Exchange extends BaseContract {
 
     getTokenToPttInputPrice(
       _token_sold: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     getTokenToPttOutputPrice(
       _ptt_bought: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     increaseAllowance(
       spender: string,
@@ -488,15 +529,29 @@ export interface Exchange extends BaseContract {
 
   factory(overrides?: CallOverrides): Promise<string>;
 
+  getInputPrice(
+    _inputAmount: BigNumberish,
+    _inputReserve: BigNumberish,
+    _outputReserve: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  getOutputPrice(
+    _outputAmount: BigNumberish,
+    _inputReserve: BigNumberish,
+    _outputReserve: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   getPttToTokenInputPrice(
     _ptt_sold: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   getPttToTokenOutputPrice(
     _token_bought: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   getReserve(
     _tokenAddress: string,
@@ -505,13 +560,13 @@ export interface Exchange extends BaseContract {
 
   getTokenToPttInputPrice(
     _token_sold: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   getTokenToPttOutputPrice(
     _ptt_bought: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   increaseAllowance(
     spender: string,
@@ -626,6 +681,20 @@ export interface Exchange extends BaseContract {
 
     factory(overrides?: CallOverrides): Promise<string>;
 
+    getInputPrice(
+      _inputAmount: BigNumberish,
+      _inputReserve: BigNumberish,
+      _outputReserve: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getOutputPrice(
+      _outputAmount: BigNumberish,
+      _inputReserve: BigNumberish,
+      _outputReserve: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getPttToTokenInputPrice(
       _ptt_sold: BigNumberish,
       overrides?: CallOverrides
@@ -700,6 +769,17 @@ export interface Exchange extends BaseContract {
       spender?: string | null,
       value?: null
     ): ApprovalEventFilter;
+
+    "Liquidity(address,address,uint256)"(
+      token?: string | null,
+      user?: string | null,
+      amount?: null
+    ): LiquidityEventFilter;
+    Liquidity(
+      token?: string | null,
+      user?: string | null,
+      amount?: null
+    ): LiquidityEventFilter;
 
     "Transfer(address,address,uint256)"(
       from?: string | null,
@@ -789,14 +869,28 @@ export interface Exchange extends BaseContract {
 
     factory(overrides?: CallOverrides): Promise<BigNumber>;
 
+    getInputPrice(
+      _inputAmount: BigNumberish,
+      _inputReserve: BigNumberish,
+      _outputReserve: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getOutputPrice(
+      _outputAmount: BigNumberish,
+      _inputReserve: BigNumberish,
+      _outputReserve: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getPttToTokenInputPrice(
       _ptt_sold: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getPttToTokenOutputPrice(
       _token_bought: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getReserve(
@@ -806,12 +900,12 @@ export interface Exchange extends BaseContract {
 
     getTokenToPttInputPrice(
       _token_sold: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getTokenToPttOutputPrice(
       _ptt_bought: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     increaseAllowance(
@@ -931,14 +1025,28 @@ export interface Exchange extends BaseContract {
 
     factory(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    getInputPrice(
+      _inputAmount: BigNumberish,
+      _inputReserve: BigNumberish,
+      _outputReserve: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getOutputPrice(
+      _outputAmount: BigNumberish,
+      _inputReserve: BigNumberish,
+      _outputReserve: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     getPttToTokenInputPrice(
       _ptt_sold: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getPttToTokenOutputPrice(
       _token_bought: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getReserve(
@@ -948,12 +1056,12 @@ export interface Exchange extends BaseContract {
 
     getTokenToPttInputPrice(
       _token_sold: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getTokenToPttOutputPrice(
       _ptt_bought: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     increaseAllowance(

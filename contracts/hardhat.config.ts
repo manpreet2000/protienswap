@@ -2,7 +2,7 @@ import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
-
+require("dotenv").config();
 
 // import { resolve } from "path";
 
@@ -22,7 +22,7 @@ task("accounts", "Prints the list of accounts", async (_taskArgs, hre) => {
   }
 });
 
-
+const ETHEREUM_PRIVATE_KEY = process.env.ETHEREUM_PRIVATE_KEY as string;
 // dotenvConfig({ path: resolve(__dirname, "./.env") });
 
 // const chainIds = {
@@ -78,6 +78,13 @@ const config: HardhatUserConfig = {
   //   rinkeby: getChainConfig("rinkeby"),
   //   ropsten: getChainConfig("ropsten"),
   // },
+  networks: {
+    ganache: {
+      url: "HTTP://127.0.0.1:7545",
+      accounts: [`0x${ETHEREUM_PRIVATE_KEY}`],
+    }
+  },
+
   paths: {
     artifacts: "./artifacts",
     cache: "./cache",
