@@ -54,8 +54,19 @@ export interface FactoryInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
 
-  events: {};
+  events: {
+    "ExchangeCreated(address,address)": EventFragment;
+  };
+
+  getEvent(nameOrSignatureOrTopic: "ExchangeCreated"): EventFragment;
 }
+
+export type ExchangeCreatedEvent = TypedEvent<
+  [string, string],
+  { token: string; exchange: string }
+>;
+
+export type ExchangeCreatedEventFilter = TypedEventFilter<ExchangeCreatedEvent>;
 
 export interface Factory extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -123,7 +134,16 @@ export interface Factory extends BaseContract {
     ): Promise<string>;
   };
 
-  filters: {};
+  filters: {
+    "ExchangeCreated(address,address)"(
+      token?: string | null,
+      exchange?: string | null
+    ): ExchangeCreatedEventFilter;
+    ExchangeCreated(
+      token?: string | null,
+      exchange?: string | null
+    ): ExchangeCreatedEventFilter;
+  };
 
   estimateGas: {
     ProtienTokenAddress(overrides?: CallOverrides): Promise<BigNumber>;

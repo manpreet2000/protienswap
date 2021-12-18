@@ -3,10 +3,6 @@ import "@typechain/hardhat";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
 require("dotenv").config();
-
-// import { resolve } from "path";
-
-// import { config as dotenvConfig } from "dotenv";
 import { HardhatUserConfig } from "hardhat/config";
 
 
@@ -23,40 +19,8 @@ task("accounts", "Prints the list of accounts", async (_taskArgs, hre) => {
 });
 
 const ETHEREUM_PRIVATE_KEY = process.env.ETHEREUM_PRIVATE_KEY as string;
-// dotenvConfig({ path: resolve(__dirname, "./.env") });
+const INFURA_KEY = process.env.INFURA_KEY as string;
 
-// const chainIds = {
-//   goerli: 5,
-//   hardhat: 31337,
-//   kovan: 42,
-//   mainnet: 1,
-//   rinkeby: 4,
-//   ropsten: 3,
-// };
-
-// Ensure that we have all the environment variables we need.
-// const mnemonic: string | undefined = process.env.MNEMONIC;
-// if (!mnemonic) {
-//   throw new Error("Please set your MNEMONIC in a .env file");
-// }
-
-// const infuraApiKey: string | undefined = process.env.INFURA_API_KEY;
-// if (!infuraApiKey) {
-//   throw new Error("Please set your INFURA_API_KEY in a .env file");
-// }
-
-// function getChainConfig(network: keyof typeof chainIds): NetworkUserConfig {
-//   const url: string = "https://" + network + ".infura.io/v3/" + infuraApiKey;
-//   return {
-//     accounts: {
-//       count: 10,
-//       mnemonic,
-//       path: "m/44'/60'/0'/0",
-//     },
-//     chainId: chainIds[network],
-//     url,
-//   };
-// }
 
 const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
@@ -66,24 +30,12 @@ const config: HardhatUserConfig = {
     excludeContracts: [],
     src: "./contracts",
   },
-  // networks: {
-  //   hardhat: {
-  //     accounts: {
-  //       mnemonic,
-  //     },
-  //     chainId: chainIds.hardhat,
-  //   },
-  //   goerli: getChainConfig("goerli"),
-  //   kovan: getChainConfig("kovan"),
-  //   rinkeby: getChainConfig("rinkeby"),
-  //   ropsten: getChainConfig("ropsten"),
-  // },
   networks: {
-    ganache: {
-      url: "HTTP://127.0.0.1:7545",
+    rinkeby: {
+      url: `https://rinkeby.infura.io/v3/${INFURA_KEY}`,
       accounts: [`0x${ETHEREUM_PRIVATE_KEY}`],
-    }
-  },
+    },
+   },
 
   paths: {
     artifacts: "./artifacts",
@@ -114,7 +66,7 @@ const config: HardhatUserConfig = {
     }
   },
   typechain: {
-    outDir: "src/types",
+    outDir: "../web/src/types",
     target: "ethers-v5",
   },
 };
