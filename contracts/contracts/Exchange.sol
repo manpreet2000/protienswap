@@ -218,5 +218,4 @@ contract Exchange is ERC20{
         return TokenToTokenOutput(_token_bought, _max_token_sold,deadline,exchange_addr,_tokenaddr);
     }
     
-    
 }
