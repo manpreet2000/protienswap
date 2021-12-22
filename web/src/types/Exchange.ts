@@ -244,15 +244,26 @@ export interface ExchangeInterface extends ethers.utils.Interface {
   ): Result;
 
   events: {
+    "Addliquidity(address,address,uint256,uint256)": EventFragment;
     "Approval(address,address,uint256)": EventFragment;
-    "Liquidity(address,address,uint256)": EventFragment;
+    "Removeliquidity(address,address,uint256,uint256)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
+    "swap(address,address,address,uint256,uint256)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "Addliquidity"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Liquidity"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Removeliquidity"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "swap"): EventFragment;
 }
+
+export type AddliquidityEvent = TypedEvent<
+  [string, string, BigNumber, BigNumber],
+  { token: string; user: string; tokenAmount: BigNumber; pttAmount: BigNumber }
+>;
+
+export type AddliquidityEventFilter = TypedEventFilter<AddliquidityEvent>;
 
 export type ApprovalEvent = TypedEvent<
   [string, string, BigNumber],
@@ -261,12 +272,12 @@ export type ApprovalEvent = TypedEvent<
 
 export type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
 
-export type LiquidityEvent = TypedEvent<
-  [string, string, BigNumber],
-  { token: string; user: string; amount: BigNumber }
+export type RemoveliquidityEvent = TypedEvent<
+  [string, string, BigNumber, BigNumber],
+  { token: string; user: string; tokenAmount: BigNumber; pttAmount: BigNumber }
 >;
 
-export type LiquidityEventFilter = TypedEventFilter<LiquidityEvent>;
+export type RemoveliquidityEventFilter = TypedEventFilter<RemoveliquidityEvent>;
 
 export type TransferEvent = TypedEvent<
   [string, string, BigNumber],
@@ -274,6 +285,19 @@ export type TransferEvent = TypedEvent<
 >;
 
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
+
+export type swapEvent = TypedEvent<
+  [string, string, string, BigNumber, BigNumber],
+  {
+    from: string;
+    to: string;
+    user: string;
+    fromAmount: BigNumber;
+    toAmount: BigNumber;
+  }
+>;
+
+export type swapEventFilter = TypedEventFilter<swapEvent>;
 
 export interface Exchange extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -759,6 +783,19 @@ export interface Exchange extends BaseContract {
   };
 
   filters: {
+    "Addliquidity(address,address,uint256,uint256)"(
+      token?: string | null,
+      user?: string | null,
+      tokenAmount?: null,
+      pttAmount?: null
+    ): AddliquidityEventFilter;
+    Addliquidity(
+      token?: string | null,
+      user?: string | null,
+      tokenAmount?: null,
+      pttAmount?: null
+    ): AddliquidityEventFilter;
+
     "Approval(address,address,uint256)"(
       owner?: string | null,
       spender?: string | null,
@@ -770,16 +807,18 @@ export interface Exchange extends BaseContract {
       value?: null
     ): ApprovalEventFilter;
 
-    "Liquidity(address,address,uint256)"(
+    "Removeliquidity(address,address,uint256,uint256)"(
       token?: string | null,
       user?: string | null,
-      amount?: null
-    ): LiquidityEventFilter;
-    Liquidity(
+      tokenAmount?: null,
+      pttAmount?: null
+    ): RemoveliquidityEventFilter;
+    Removeliquidity(
       token?: string | null,
       user?: string | null,
-      amount?: null
-    ): LiquidityEventFilter;
+      tokenAmount?: null,
+      pttAmount?: null
+    ): RemoveliquidityEventFilter;
 
     "Transfer(address,address,uint256)"(
       from?: string | null,
@@ -791,6 +830,21 @@ export interface Exchange extends BaseContract {
       to?: string | null,
       value?: null
     ): TransferEventFilter;
+
+    "swap(address,address,address,uint256,uint256)"(
+      from?: string | null,
+      to?: string | null,
+      user?: string | null,
+      fromAmount?: null,
+      toAmount?: null
+    ): swapEventFilter;
+    swap(
+      from?: string | null,
+      to?: string | null,
+      user?: string | null,
+      fromAmount?: null,
+      toAmount?: null
+    ): swapEventFilter;
   };
 
   estimateGas: {

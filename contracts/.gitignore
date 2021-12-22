@@ -9,3 +9,9 @@ cache
 artifacts
 src
 package-lock.json
+
+coverage
+coverage.json
+
+# OpenZeppelin
+.openzeppelin/unknown-*.json
