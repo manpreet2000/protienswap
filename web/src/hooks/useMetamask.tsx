@@ -7,10 +7,9 @@ const chainID = process.env.CHAIN_ID;
 if(!chainID) throw new Error("Chain ID not present in env");
 const injector = new InjectedConnector({supportedChainIds: [+chainID]});
 export const useMetamask = () =>{
-    const web3utils = useWeb3React();
+    const {active,...web3utils} = useWeb3React();
     const [loading,setLoading] = useState(false);
     const instance = EtherService.getInstance();
-
     useEffect(()=>{
         injector.isAuthorized().then((t)=>{
             if(t){
@@ -33,6 +32,7 @@ export const useMetamask = () =>{
         }
     }
     return {
+        active,
         loading,
         metamaskConnect
     }
