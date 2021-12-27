@@ -23,7 +23,6 @@ export const GlobalCss: React.FC = () => {
             fontSize: theme.typography.fontSize,
             fontWeight: theme.typography.fontWeightRegular,
             lineHeight: 1.5,
-            color: theme.palette.common.white
           },
           hr: {
             boxSizing: "content-box",
@@ -37,7 +36,6 @@ export const GlobalCss: React.FC = () => {
           "h1, h2, h3, h4, h5, h6": {
             marginTop: 0,
             marginBottom: "0.5rem",
-            color: theme.palette.text.primary,
             fontWeight: theme.typography.fontWeightRegular,
           },
           p: {
