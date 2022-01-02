@@ -93,6 +93,24 @@ export class EtherService {
         return ethers.utils.formatUnits(balance, token.decimal);
     }
     
+    async approveTokenAmount(
+        amount: string,
+        to: string,
+        token: Token,
+      ): Promise<ethers.ContractTransaction> {
+        const bigIntAmount = ethers.utils.parseUnits(amount, token.decimal);
+        const erc20Instance = ERC20__factory.connect(
+          token.address,
+          this.provider?.getSigner(0) as ethers.providers.JsonRpcSigner,
+        );
+        const tx: ethers.ContractTransaction = await erc20Instance.functions.approve(
+          to,
+          bigIntAmount.toString(),
+        );
+        await tx.wait();
+        return tx;
+      }
+    
 
 
 
