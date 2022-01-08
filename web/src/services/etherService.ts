@@ -80,7 +80,8 @@ export class EtherService {
             this.provider.getSigner(0) as ethers.providers.JsonRpcSigner,
         );
         const balance:ethers.BigNumber = await erc20Instance.allowance(ownerAddress,spenderAddress);
-        return ethers.utils.formatUnits(balance,token.decimal);
+        const decimals = await erc20Instance.decimals();
+        return ethers.utils.formatUnits(balance,decimals);
     }
     public async balanceOf(token: Token, address: string): Promise<string> {
         const tokenInstance = ERC20__factory.connect(
@@ -93,7 +94,40 @@ export class EtherService {
         return ethers.utils.formatUnits(balance, token.decimal);
     }
     
-
+    async approveTokenAmount(
+        amount: string,
+        to: string,
+        token: Token,
+      ): Promise<ethers.ContractTransaction> {
+        const bigIntAmount = ethers.utils.parseUnits(amount, token.decimal);
+        const erc20Instance = ERC20__factory.connect(
+          token.address,
+          this.provider?.getSigner(0) as ethers.providers.JsonRpcSigner,
+        );
+        const tx: ethers.ContractTransaction = await erc20Instance.functions.approve(
+          to,
+          bigIntAmount.toString(),
+        );
+        await tx.wait();
+        return tx;
+      }
+    
+    async getTokenfromAddr(addr:string):Promise<Token>{
+        const erc20Instance = ERC20__factory.connect(
+            addr,
+            this.provider?.getSigner(0) as ethers.providers.JsonRpcSigner,
+          );
+        const name=await erc20Instance.name();
+        const sym = await erc20Instance.symbol();
+        const dec = await erc20Instance.decimals();
+        return {
+            name:name,
+            symbol:sym,
+            logoUrl:"",
+            address:addr,
+            decimal:dec
+        }
+    }
 
 
 }
