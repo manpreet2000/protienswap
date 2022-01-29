@@ -21,6 +21,16 @@ export const GlobalCss = () => {
             background:
               "linear-gradient(113deg, rgba(47,30,16,1) 0%, rgba(35,34,71,1) 100%);",
           },
+          "h1, h2, h3, h4, h5, h6": {
+            marginTop: 0,
+            marginBottom: "0.5rem",
+            color: theme.palette.text.primary,
+            fontWeight: theme.typography.fontWeightRegular,
+          },
+          p: {
+            marginTop: 0,
+            marginBottom: "16px",
+          },
           h1: {
             ...theme.typography.h1,
           },

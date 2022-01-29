@@ -2,7 +2,7 @@ import {  UnsupportedChainIdError, useWeb3React } from "@web3-react/core";
 import { useEffect, useState } from "react";
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { EtherService } from "../services/etherService";
-
+// todo: create Global error to handle errors
 const chainID = 4;
 if(!chainID) console.log("Chain ID not present in env");
 const injector = new InjectedConnector({supportedChainIds: [+chainID]});

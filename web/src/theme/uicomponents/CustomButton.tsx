@@ -7,7 +7,7 @@ interface CustomButtonProps extends ButtonProps {
     loading?: boolean;
 }
 export const CustonButton:React.FC<CustomButtonProps> = ({text,loading,sx, ...props}) =>{
-       return(
+    return(
         <LoadingButton 
         {...props}
         variant="contained"

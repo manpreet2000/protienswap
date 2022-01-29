@@ -16,8 +16,11 @@ export const theme = createTheme(({
             paper: colors.primary
         },
         text:{
-            primary: colors.textGray
-        }
+            primary: colors.primary
+        },
+        action: {
+            disabledBackground: colors.secondary,
+          }
     },
     typography: {
         fontSize: 14, 
@@ -52,5 +55,8 @@ export const theme = createTheme(({
           marginBottom: "16px",
           lineHeight: 1.4,
         },
+        button: {
+            textTransform: 'none'
+          }
       },
 }));
