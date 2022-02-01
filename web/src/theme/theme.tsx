@@ -13,7 +13,7 @@ export const theme = createTheme(({
             main: colors.mediumGray
         },
         background:{
-            paper: colors.primary
+            paper: colors.mediumGray
         },
         text:{
             primary: colors.primary

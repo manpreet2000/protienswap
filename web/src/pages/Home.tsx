@@ -1,9 +1,9 @@
 import React from "react";
-import { MetamaskButton } from "../components/MetamaskButton/MetamaskButton";
+import { Header } from "../components";
 const Home: React.FC = () => {
   return (
     <>
-    <MetamaskButton></MetamaskButton>
+    <Header />
     </>
   );
 };

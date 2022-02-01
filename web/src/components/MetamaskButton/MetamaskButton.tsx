@@ -2,7 +2,7 @@ import { CustonButton } from "../../theme/uicomponents/CustomButton";
 import { useMetamask } from "../../hooks/useMetamask";
 import { useWeb3React } from "@web3-react/core";
 
-export const MetamaskButton: React.FC = () => {
+const MetamaskButton: React.FC = () => {
   const metamask = useMetamask();
   const {account} = useWeb3React();
   return (
@@ -14,3 +14,4 @@ export const MetamaskButton: React.FC = () => {
     />
   );
 };
+export default MetamaskButton;
