@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { CURRENTMODAL, SwapContext } from '../../context/SwapContext';
 import React from 'react';
 
-const LiquidityHeader:React.FC = () => {
+const LiquidityHeader: React.FC = () => {
   const styles = {
     color: 'background.paper',
     padding: '0 10px 0 10px',

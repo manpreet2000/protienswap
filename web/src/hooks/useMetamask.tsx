@@ -20,7 +20,6 @@ export const useMetamask = () => {
         });
       }
     });
-
   }, [web3utils.activate, instance]);
   useEffect(() => {
     if (active) {

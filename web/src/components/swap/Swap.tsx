@@ -3,7 +3,7 @@ import { ArrowDropDownCircle } from '@mui/icons-material';
 import DropdownInput from '../dropdownInput/DropdownInput';
 import React from 'react';
 
-const Swap:React.FC = () => {
+const Swap: React.FC = () => {
   const swapWrapper = {
     alignSelf: 'center',
     backgroundColor: 'primary.main',
@@ -24,7 +24,7 @@ const Swap:React.FC = () => {
       <Typography sx={{ color: 'success.main', fontWeight: 'bold' }}>
         Swap
       </Typography>
-      <DropdownInput />
+      <DropdownInput buttonText="ETH" />
       <Box
         sx={{
           display: 'flex',
@@ -33,7 +33,7 @@ const Swap:React.FC = () => {
         }}
       >
         <ArrowDropDownCircle sx={arrowDownStyle} />
-        <DropdownInput />
+        <DropdownInput buttonText="Select a Token" />
       </Box>
     </Box>
   );

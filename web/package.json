@@ -37,7 +37,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "husky install",
-    "lint": "prettier --write './'"
+    "lint": "prettier --write './'",
+    "lint-staged": "pretty-quick --staged"
   },
   "husky": {
     "hooks": {
