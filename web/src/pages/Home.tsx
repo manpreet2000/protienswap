@@ -1,18 +1,21 @@
-import React from "react";
-import { Button } from "@mui/material";
-import { useMetamask } from "../hooks/useMetamask";
-import { EtherService } from "../services/etherService";
-import { Box } from "../components/Box";
+import { styled } from '@mui/styles';
+import { Box } from '@mui/system';
+import React, { useContext } from 'react';
+import { Header, Swap } from '../components';
+import { CURRENTMODAL, SwapContext } from '../context/SwapContext';
 const Home: React.FC = () => {
-  const { active, loading, metamaskConnect } = useMetamask();
-  const account = EtherService.getInstance().userAccount;
-  console.log({ active, loading, account });
+  const swapStatus = useContext(SwapContext);
   return (
-    <>
-      <Button onClick={metamaskConnect}>click me</Button>
-      <Box />
-    </>
+    <HomeWrapper>
+      <Header />
+      {swapStatus.currentModal===CURRENTMODAL.SWAP && <Swap />}
+    </HomeWrapper>
   );
 };
-
 export default Home;
+
+const HomeWrapper = styled(Box)({
+  display: 'flex',
+  flexDirection: 'column',
+  height: '100vh'
+});

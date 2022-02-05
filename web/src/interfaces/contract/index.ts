@@ -1,3 +1,3 @@
 export interface Contract {
-    address:string
+  address: string;
 }

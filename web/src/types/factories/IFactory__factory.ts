@@ -2,30 +2,30 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer, utils } from "ethers";
-import { Provider } from "@ethersproject/providers";
-import type { IFactory, IFactoryInterface } from "../IFactory";
+import { Contract, Signer, utils } from 'ethers';
+import { Provider } from '@ethersproject/providers';
+import type { IFactory, IFactoryInterface } from '../IFactory';
 
 const _abi = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "_tokenAddress",
-        type: "address",
-      },
+        internalType: 'address',
+        name: '_tokenAddress',
+        type: 'address'
+      }
     ],
-    name: "getExchange",
+    name: 'getExchange',
     outputs: [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        internalType: 'address',
+        name: '',
+        type: 'address'
+      }
     ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
+    stateMutability: 'nonpayable',
+    type: 'function'
+  }
 ];
 
 export class IFactory__factory {

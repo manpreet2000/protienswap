@@ -1,8 +1,8 @@
-import { ContractTransaction, ethers } from "ethers";
-import { Token } from "../interfaces/token";
-import { Contract } from "../interfaces/contract";
-import { EtherService } from "./etherService";
-import { Exchange__factory, Factory__factory } from "../types";
+import { ContractTransaction, ethers } from 'ethers';
+import { Token } from '../interfaces/token';
+import { Contract } from '../interfaces/contract';
+import { EtherService } from './etherService';
+import { Exchange__factory, Factory__factory } from '../types';
 
 export class factoryService {
   private static instance: factoryService;
@@ -12,14 +12,14 @@ export class factoryService {
   private constructor() {
     this.etherService = EtherService.getInstance();
     this.ProtienToken = {
-      name: "Protien Token",
-      symbol: "PTT",
-      logoUrl: "",
+      name: 'Protien Token',
+      symbol: 'PTT',
+      logoUrl: '',
       address: process.env.PROTIEN_TOKEN_ADDR as string,
-      decimal: 18,
+      decimal: 18
     };
     this.ProtienFactory = {
-      address: process.env.PROTIEN_FACTORY_ADDR as string,
+      address: process.env.PROTIEN_FACTORY_ADDR as string
     };
   }
 
@@ -143,7 +143,7 @@ export class factoryService {
     token1_amount: string,
     token2_addr: string,
     token2_amount: string
-  ) :Promise<ContractTransaction>{
+  ): Promise<ContractTransaction> {
     const factoryContract = Factory__factory.connect(
       this.ProtienFactory.address,
       this.etherService.provider?.getSigner(0) as ethers.providers.JsonRpcSigner
