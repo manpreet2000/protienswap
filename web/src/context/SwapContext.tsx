@@ -1,8 +1,8 @@
-import { createContext, useState } from "react";
+import { createContext, useState } from 'react';
 
 export enum CURRENTMODAL {
   SWAP,
-  POOL,
+  POOL
 }
 
 interface ISwapContext {
@@ -12,7 +12,8 @@ interface ISwapContext {
 
 const initialValue = {
   currentModal: CURRENTMODAL.SWAP,
-  changeCurrentModal: (mode:CURRENTMODAL) => {}
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  changeCurrentModal: (mode: CURRENTMODAL) => {}
 };
 
 export const SwapContext = createContext<ISwapContext>(initialValue);

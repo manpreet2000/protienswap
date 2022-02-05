@@ -11,244 +11,244 @@ import {
   Overrides,
   PopulatedTransaction,
   Signer,
-  utils,
-} from "ethers";
-import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
-import { Listener, Provider } from "@ethersproject/providers";
-import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
+  utils
+} from 'ethers';
+import { FunctionFragment, Result, EventFragment } from '@ethersproject/abi';
+import { Listener, Provider } from '@ethersproject/providers';
+import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from './common';
 
 export interface ExchangeInterface extends utils.Interface {
   functions: {
-    "PttToTokenInputSwap(uint256,uint256,uint256)": FunctionFragment;
-    "PttToTokenOutputSwap(uint256,uint256,uint256)": FunctionFragment;
-    "TokenToTokenInputSwap(uint256,uint256,uint256,address)": FunctionFragment;
-    "TokenToTokenOutputSwap(uint256,uint256,uint256,address)": FunctionFragment;
-    "TokentoPttInputSwap(uint256,uint256,uint256)": FunctionFragment;
-    "TokentoPttOutputSwap(uint256,uint256,uint256)": FunctionFragment;
-    "addLiquidity(uint256,uint256,uint256)": FunctionFragment;
-    "allowance(address,address)": FunctionFragment;
-    "approve(address,uint256)": FunctionFragment;
-    "balanceOf(address)": FunctionFragment;
-    "decimals()": FunctionFragment;
-    "decreaseAllowance(address,uint256)": FunctionFragment;
-    "factory()": FunctionFragment;
-    "getInputPrice(uint256,uint256,uint256)": FunctionFragment;
-    "getOutputPrice(uint256,uint256,uint256)": FunctionFragment;
-    "getPttToTokenInputPrice(uint256)": FunctionFragment;
-    "getPttToTokenOutputPrice(uint256)": FunctionFragment;
-    "getReserve(address)": FunctionFragment;
-    "getTokenToPttInputPrice(uint256)": FunctionFragment;
-    "getTokenToPttOutputPrice(uint256)": FunctionFragment;
-    "increaseAllowance(address,uint256)": FunctionFragment;
-    "name()": FunctionFragment;
-    "pttAddress()": FunctionFragment;
-    "removeLiquidity(uint256,uint256,uint256,uint256)": FunctionFragment;
-    "symbol()": FunctionFragment;
-    "tokenAddress()": FunctionFragment;
-    "totalSupply()": FunctionFragment;
-    "transfer(address,uint256)": FunctionFragment;
-    "transferFrom(address,address,uint256)": FunctionFragment;
+    'PttToTokenInputSwap(uint256,uint256,uint256)': FunctionFragment;
+    'PttToTokenOutputSwap(uint256,uint256,uint256)': FunctionFragment;
+    'TokenToTokenInputSwap(uint256,uint256,uint256,address)': FunctionFragment;
+    'TokenToTokenOutputSwap(uint256,uint256,uint256,address)': FunctionFragment;
+    'TokentoPttInputSwap(uint256,uint256,uint256)': FunctionFragment;
+    'TokentoPttOutputSwap(uint256,uint256,uint256)': FunctionFragment;
+    'addLiquidity(uint256,uint256,uint256)': FunctionFragment;
+    'allowance(address,address)': FunctionFragment;
+    'approve(address,uint256)': FunctionFragment;
+    'balanceOf(address)': FunctionFragment;
+    'decimals()': FunctionFragment;
+    'decreaseAllowance(address,uint256)': FunctionFragment;
+    'factory()': FunctionFragment;
+    'getInputPrice(uint256,uint256,uint256)': FunctionFragment;
+    'getOutputPrice(uint256,uint256,uint256)': FunctionFragment;
+    'getPttToTokenInputPrice(uint256)': FunctionFragment;
+    'getPttToTokenOutputPrice(uint256)': FunctionFragment;
+    'getReserve(address)': FunctionFragment;
+    'getTokenToPttInputPrice(uint256)': FunctionFragment;
+    'getTokenToPttOutputPrice(uint256)': FunctionFragment;
+    'increaseAllowance(address,uint256)': FunctionFragment;
+    'name()': FunctionFragment;
+    'pttAddress()': FunctionFragment;
+    'removeLiquidity(uint256,uint256,uint256,uint256)': FunctionFragment;
+    'symbol()': FunctionFragment;
+    'tokenAddress()': FunctionFragment;
+    'totalSupply()': FunctionFragment;
+    'transfer(address,uint256)': FunctionFragment;
+    'transferFrom(address,address,uint256)': FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: "PttToTokenInputSwap",
+    functionFragment: 'PttToTokenInputSwap',
     values: [BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "PttToTokenOutputSwap",
+    functionFragment: 'PttToTokenOutputSwap',
     values: [BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "TokenToTokenInputSwap",
+    functionFragment: 'TokenToTokenInputSwap',
     values: [BigNumberish, BigNumberish, BigNumberish, string]
   ): string;
   encodeFunctionData(
-    functionFragment: "TokenToTokenOutputSwap",
+    functionFragment: 'TokenToTokenOutputSwap',
     values: [BigNumberish, BigNumberish, BigNumberish, string]
   ): string;
   encodeFunctionData(
-    functionFragment: "TokentoPttInputSwap",
+    functionFragment: 'TokentoPttInputSwap',
     values: [BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "TokentoPttOutputSwap",
+    functionFragment: 'TokentoPttOutputSwap',
     values: [BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "addLiquidity",
+    functionFragment: 'addLiquidity',
     values: [BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "allowance",
+    functionFragment: 'allowance',
     values: [string, string]
   ): string;
   encodeFunctionData(
-    functionFragment: "approve",
+    functionFragment: 'approve',
     values: [string, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
-  encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
+  encodeFunctionData(functionFragment: 'balanceOf', values: [string]): string;
+  encodeFunctionData(functionFragment: 'decimals', values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "decreaseAllowance",
+    functionFragment: 'decreaseAllowance',
     values: [string, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: "factory", values?: undefined): string;
+  encodeFunctionData(functionFragment: 'factory', values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "getInputPrice",
+    functionFragment: 'getInputPrice',
     values: [BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "getOutputPrice",
+    functionFragment: 'getOutputPrice',
     values: [BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "getPttToTokenInputPrice",
+    functionFragment: 'getPttToTokenInputPrice',
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "getPttToTokenOutputPrice",
+    functionFragment: 'getPttToTokenOutputPrice',
     values: [BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: "getReserve", values: [string]): string;
+  encodeFunctionData(functionFragment: 'getReserve', values: [string]): string;
   encodeFunctionData(
-    functionFragment: "getTokenToPttInputPrice",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getTokenToPttOutputPrice",
+    functionFragment: 'getTokenToPttInputPrice',
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "increaseAllowance",
+    functionFragment: 'getTokenToPttOutputPrice',
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: 'increaseAllowance',
     values: [string, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: "name", values?: undefined): string;
+  encodeFunctionData(functionFragment: 'name', values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "pttAddress",
+    functionFragment: 'pttAddress',
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "removeLiquidity",
+    functionFragment: 'removeLiquidity',
     values: [BigNumberish, BigNumberish, BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
+  encodeFunctionData(functionFragment: 'symbol', values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "tokenAddress",
+    functionFragment: 'tokenAddress',
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "totalSupply",
+    functionFragment: 'totalSupply',
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "transfer",
+    functionFragment: 'transfer',
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "transferFrom",
+    functionFragment: 'transferFrom',
     values: [string, string, BigNumberish]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "PttToTokenInputSwap",
+    functionFragment: 'PttToTokenInputSwap',
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "PttToTokenOutputSwap",
+    functionFragment: 'PttToTokenOutputSwap',
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "TokenToTokenInputSwap",
+    functionFragment: 'TokenToTokenInputSwap',
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "TokenToTokenOutputSwap",
+    functionFragment: 'TokenToTokenOutputSwap',
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "TokentoPttInputSwap",
+    functionFragment: 'TokentoPttInputSwap',
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "TokentoPttOutputSwap",
+    functionFragment: 'TokentoPttOutputSwap',
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "addLiquidity",
+    functionFragment: 'addLiquidity',
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'allowance', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'approve', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'balanceOf', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'decimals', data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "decreaseAllowance",
+    functionFragment: 'decreaseAllowance',
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "factory", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'factory', data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "getInputPrice",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getOutputPrice",
+    functionFragment: 'getInputPrice',
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getPttToTokenInputPrice",
+    functionFragment: 'getOutputPrice',
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getPttToTokenOutputPrice",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "getReserve", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "getTokenToPttInputPrice",
+    functionFragment: 'getPttToTokenInputPrice',
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getTokenToPttOutputPrice",
+    functionFragment: 'getPttToTokenOutputPrice',
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: 'getReserve', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: 'getTokenToPttInputPrice',
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "increaseAllowance",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "pttAddress", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "removeLiquidity",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "tokenAddress",
+    functionFragment: 'getTokenToPttOutputPrice',
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "totalSupply",
+    functionFragment: 'increaseAllowance',
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "transfer", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'name', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'pttAddress', data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "transferFrom",
+    functionFragment: 'removeLiquidity',
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: 'symbol', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: 'tokenAddress',
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: 'totalSupply',
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: 'transfer', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: 'transferFrom',
     data: BytesLike
   ): Result;
 
   events: {
-    "Addliquidity(address,address,uint256,uint256)": EventFragment;
-    "Approval(address,address,uint256)": EventFragment;
-    "Removeliquidity(address,address,uint256,uint256)": EventFragment;
-    "Transfer(address,address,uint256)": EventFragment;
-    "swap(address,address,address,uint256,uint256)": EventFragment;
+    'Addliquidity(address,address,uint256,uint256)': EventFragment;
+    'Approval(address,address,uint256)': EventFragment;
+    'Removeliquidity(address,address,uint256,uint256)': EventFragment;
+    'Transfer(address,address,uint256)': EventFragment;
+    'swap(address,address,address,uint256,uint256)': EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "Addliquidity"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Removeliquidity"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "swap"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'Addliquidity'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'Approval'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'Removeliquidity'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'Transfer'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'swap'): EventFragment;
 }
 
 export type AddliquidityEvent = TypedEvent<
@@ -776,7 +776,7 @@ export interface Exchange extends BaseContract {
   };
 
   filters: {
-    "Addliquidity(address,address,uint256,uint256)"(
+    'Addliquidity(address,address,uint256,uint256)'(
       token?: string | null,
       user?: string | null,
       tokenAmount?: null,
@@ -789,7 +789,7 @@ export interface Exchange extends BaseContract {
       pttAmount?: null
     ): AddliquidityEventFilter;
 
-    "Approval(address,address,uint256)"(
+    'Approval(address,address,uint256)'(
       owner?: string | null,
       spender?: string | null,
       value?: null
@@ -800,7 +800,7 @@ export interface Exchange extends BaseContract {
       value?: null
     ): ApprovalEventFilter;
 
-    "Removeliquidity(address,address,uint256,uint256)"(
+    'Removeliquidity(address,address,uint256,uint256)'(
       token?: string | null,
       user?: string | null,
       tokenAmount?: null,
@@ -813,7 +813,7 @@ export interface Exchange extends BaseContract {
       pttAmount?: null
     ): RemoveliquidityEventFilter;
 
-    "Transfer(address,address,uint256)"(
+    'Transfer(address,address,uint256)'(
       from?: string | null,
       to?: string | null,
       value?: null
@@ -824,7 +824,7 @@ export interface Exchange extends BaseContract {
       value?: null
     ): TransferEventFilter;
 
-    "swap(address,address,address,uint256,uint256)"(
+    'swap(address,address,address,uint256,uint256)'(
       from?: string | null,
       to?: string | null,
       user?: string | null,

@@ -2,88 +2,88 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer, utils } from "ethers";
-import { Provider } from "@ethersproject/providers";
-import type { IExchange, IExchangeInterface } from "../IExchange";
+import { Contract, Signer, utils } from 'ethers';
+import { Provider } from '@ethersproject/providers';
+import type { IExchange, IExchangeInterface } from '../IExchange';
 
 const _abi = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "_ptt_sold",
-        type: "uint256",
+        internalType: 'uint256',
+        name: '_ptt_sold',
+        type: 'uint256'
       },
       {
-        internalType: "uint256",
-        name: "_min_token",
-        type: "uint256",
+        internalType: 'uint256',
+        name: '_min_token',
+        type: 'uint256'
       },
       {
-        internalType: "uint256",
-        name: "deadline",
-        type: "uint256",
-      },
+        internalType: 'uint256',
+        name: 'deadline',
+        type: 'uint256'
+      }
     ],
-    name: "PttToTokenInputSwap",
+    name: 'PttToTokenInputSwap',
     outputs: [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256'
+      }
     ],
-    stateMutability: "nonpayable",
-    type: "function",
+    stateMutability: 'nonpayable',
+    type: 'function'
   },
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "_token_bought",
-        type: "uint256",
+        internalType: 'uint256',
+        name: '_token_bought',
+        type: 'uint256'
       },
       {
-        internalType: "uint256",
-        name: "_max_ptt",
-        type: "uint256",
+        internalType: 'uint256',
+        name: '_max_ptt',
+        type: 'uint256'
       },
       {
-        internalType: "uint256",
-        name: "deadline",
-        type: "uint256",
-      },
+        internalType: 'uint256',
+        name: 'deadline',
+        type: 'uint256'
+      }
     ],
-    name: "PttToTokenOutputSwap",
+    name: 'PttToTokenOutputSwap',
     outputs: [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256'
+      }
     ],
-    stateMutability: "nonpayable",
-    type: "function",
+    stateMutability: 'nonpayable',
+    type: 'function'
   },
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "_token_bought",
-        type: "uint256",
-      },
+        internalType: 'uint256',
+        name: '_token_bought',
+        type: 'uint256'
+      }
     ],
-    name: "getTokenToPttOutputPrice",
+    name: 'getTokenToPttOutputPrice',
     outputs: [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256'
+      }
     ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
+    stateMutability: 'nonpayable',
+    type: 'function'
+  }
 ];
 
 export class IExchange__factory {

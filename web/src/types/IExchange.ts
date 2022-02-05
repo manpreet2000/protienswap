@@ -11,42 +11,42 @@ import {
   Overrides,
   PopulatedTransaction,
   Signer,
-  utils,
-} from "ethers";
-import { FunctionFragment, Result } from "@ethersproject/abi";
-import { Listener, Provider } from "@ethersproject/providers";
-import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
+  utils
+} from 'ethers';
+import { FunctionFragment, Result } from '@ethersproject/abi';
+import { Listener, Provider } from '@ethersproject/providers';
+import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from './common';
 
 export interface IExchangeInterface extends utils.Interface {
   functions: {
-    "PttToTokenInputSwap(uint256,uint256,uint256)": FunctionFragment;
-    "PttToTokenOutputSwap(uint256,uint256,uint256)": FunctionFragment;
-    "getTokenToPttOutputPrice(uint256)": FunctionFragment;
+    'PttToTokenInputSwap(uint256,uint256,uint256)': FunctionFragment;
+    'PttToTokenOutputSwap(uint256,uint256,uint256)': FunctionFragment;
+    'getTokenToPttOutputPrice(uint256)': FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: "PttToTokenInputSwap",
+    functionFragment: 'PttToTokenInputSwap',
     values: [BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "PttToTokenOutputSwap",
+    functionFragment: 'PttToTokenOutputSwap',
     values: [BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "getTokenToPttOutputPrice",
+    functionFragment: 'getTokenToPttOutputPrice',
     values: [BigNumberish]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "PttToTokenInputSwap",
+    functionFragment: 'PttToTokenInputSwap',
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "PttToTokenOutputSwap",
+    functionFragment: 'PttToTokenOutputSwap',
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getTokenToPttOutputPrice",
+    functionFragment: 'getTokenToPttOutputPrice',
     data: BytesLike
   ): Result;
 

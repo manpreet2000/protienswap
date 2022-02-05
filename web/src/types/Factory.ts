@@ -10,47 +10,47 @@ import {
   Overrides,
   PopulatedTransaction,
   Signer,
-  utils,
-} from "ethers";
-import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
-import { Listener, Provider } from "@ethersproject/providers";
-import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
+  utils
+} from 'ethers';
+import { FunctionFragment, Result, EventFragment } from '@ethersproject/abi';
+import { Listener, Provider } from '@ethersproject/providers';
+import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from './common';
 
 export interface FactoryInterface extends utils.Interface {
   functions: {
-    "ProtienTokenAddress()": FunctionFragment;
-    "createExchange(address)": FunctionFragment;
-    "getExchange(address)": FunctionFragment;
+    'ProtienTokenAddress()': FunctionFragment;
+    'createExchange(address)': FunctionFragment;
+    'getExchange(address)': FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: "ProtienTokenAddress",
+    functionFragment: 'ProtienTokenAddress',
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "createExchange",
+    functionFragment: 'createExchange',
     values: [string]
   ): string;
-  encodeFunctionData(functionFragment: "getExchange", values: [string]): string;
+  encodeFunctionData(functionFragment: 'getExchange', values: [string]): string;
 
   decodeFunctionResult(
-    functionFragment: "ProtienTokenAddress",
+    functionFragment: 'ProtienTokenAddress',
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "createExchange",
+    functionFragment: 'createExchange',
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getExchange",
+    functionFragment: 'getExchange',
     data: BytesLike
   ): Result;
 
   events: {
-    "ExchangeCreated(address,address)": EventFragment;
+    'ExchangeCreated(address,address)': EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "ExchangeCreated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'ExchangeCreated'): EventFragment;
 }
 
 export type ExchangeCreatedEvent = TypedEvent<
@@ -127,7 +127,7 @@ export interface Factory extends BaseContract {
   };
 
   filters: {
-    "ExchangeCreated(address,address)"(
+    'ExchangeCreated(address,address)'(
       token?: string | null,
       exchange?: string | null
     ): ExchangeCreatedEventFilter;

@@ -2,104 +2,104 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers } from "ethers";
+import { ethers } from 'ethers';
 import {
   FactoryOptions,
-  HardhatEthersHelpers as HardhatEthersHelpersBase,
-} from "@nomiclabs/hardhat-ethers/types";
+  HardhatEthersHelpers as HardhatEthersHelpersBase
+} from '@nomiclabs/hardhat-ethers/types';
 
-import * as Contracts from ".";
+import * as Contracts from '.';
 
-declare module "hardhat/types/runtime" {
+declare module 'hardhat/types/runtime' {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
-      name: "ERC20",
+      name: 'ERC20',
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC20__factory>;
     getContractFactory(
-      name: "IERC20Metadata",
+      name: 'IERC20Metadata',
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC20Metadata__factory>;
     getContractFactory(
-      name: "IERC20",
+      name: 'IERC20',
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC20__factory>;
     getContractFactory(
-      name: "Exchange",
+      name: 'Exchange',
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Exchange__factory>;
     getContractFactory(
-      name: "IExchange",
+      name: 'IExchange',
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IExchange__factory>;
     getContractFactory(
-      name: "IFactory",
+      name: 'IFactory',
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IFactory__factory>;
     getContractFactory(
-      name: "PTT",
+      name: 'PTT',
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.PTT__factory>;
     getContractFactory(
-      name: "Factory",
+      name: 'Factory',
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Factory__factory>;
     getContractFactory(
-      name: "ProtienToken",
+      name: 'ProtienToken',
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ProtienToken__factory>;
     getContractFactory(
-      name: "WETH9",
+      name: 'WETH9',
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.WETH9__factory>;
 
     getContractAt(
-      name: "ERC20",
+      name: 'ERC20',
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ERC20>;
     getContractAt(
-      name: "IERC20Metadata",
+      name: 'IERC20Metadata',
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IERC20Metadata>;
     getContractAt(
-      name: "IERC20",
+      name: 'IERC20',
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IERC20>;
     getContractAt(
-      name: "Exchange",
+      name: 'Exchange',
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.Exchange>;
     getContractAt(
-      name: "IExchange",
+      name: 'IExchange',
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IExchange>;
     getContractAt(
-      name: "IFactory",
+      name: 'IFactory',
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IFactory>;
     getContractAt(
-      name: "PTT",
+      name: 'PTT',
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.PTT>;
     getContractAt(
-      name: "Factory",
+      name: 'Factory',
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.Factory>;
     getContractAt(
-      name: "ProtienToken",
+      name: 'ProtienToken',
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ProtienToken>;
     getContractAt(
-      name: "WETH9",
+      name: 'WETH9',
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.WETH9>;

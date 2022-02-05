@@ -10,21 +10,21 @@ import {
   Overrides,
   PopulatedTransaction,
   Signer,
-  utils,
-} from "ethers";
-import { FunctionFragment, Result } from "@ethersproject/abi";
-import { Listener, Provider } from "@ethersproject/providers";
-import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
+  utils
+} from 'ethers';
+import { FunctionFragment, Result } from '@ethersproject/abi';
+import { Listener, Provider } from '@ethersproject/providers';
+import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from './common';
 
 export interface IFactoryInterface extends utils.Interface {
   functions: {
-    "getExchange(address)": FunctionFragment;
+    'getExchange(address)': FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: "getExchange", values: [string]): string;
+  encodeFunctionData(functionFragment: 'getExchange', values: [string]): string;
 
   decodeFunctionResult(
-    functionFragment: "getExchange",
+    functionFragment: 'getExchange',
     data: BytesLike
   ): Result;
 
