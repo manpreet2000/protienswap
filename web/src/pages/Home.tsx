@@ -1,12 +1,14 @@
 import { styled } from '@mui/styles';
 import { Box } from '@mui/system';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Header, Swap } from '../components';
+import { CURRENTMODAL, SwapContext } from '../context/SwapContext';
 const Home: React.FC = () => {
+  const swapStatus = useContext(SwapContext);
   return (
     <HomeWrapper>
       <Header />
-      <Swap />
+      {swapStatus.currentModal===CURRENTMODAL.SWAP && <Swap />}
     </HomeWrapper>
   );
 };
